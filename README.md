@@ -23,8 +23,8 @@ go run main.go
 
 The `go run` command compiles and executes the Go code in the specified file (`main.go` in this case).
 
-6. View the output: After executing the `go run` command, you should see ip address printed in the terminal [http://127.0.0.1:8080/docs#/](http://127.0.0.1:8080/docs#/).
-7. Some products id that you can use with the API: 
+5. View the output: After executing the `go run` command, you should see ip address printed in the terminal [http://127.0.0.1:8080/docs#/](http://127.0.0.1:8080/docs#/).
+6. Some products id that you can use with the API: 
 ```shell
 [
   "PROD-9eab9df2-6d54-11ee-b962-0242ac120002",
