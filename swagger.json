@@ -1,0 +1,307 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Trafilea API",
+    "description": "E-commerce platform",
+    "contact": {
+      "name": "Eddie Riascos",
+      "email": "eriascos@trafilea.com"
+    },
+    "version": "1.0.0"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users/{userId}/carts/": {
+      "post": {
+        "description": "Create a new cart if it does not exist",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "operationId": "CreateCart",
+        "responses": {
+          "200": {
+            "description": "UUID for the new cart",
+            "schema": {
+              "$ref": "#/definitions/NewCartResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/carts/{cartId}": {
+      "post": {
+        "description": "Add a new product to cart",
+        "operationId": "AddNewProduct",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cartId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListProducts"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/carts/{cartId}/products/{productId}/": {
+      "patch": {
+        "description": "Modify quantity for a product",
+        "operationId": "ModifyQuantity",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cartId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateQuantity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateQuantity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/orders/": {
+      "post": {
+        "description": "Create a new order",
+         "operationId": "CreateOrder",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ListProducts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Product"
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "product id"
+        },
+        "name": {
+          "type": "string",
+          "description": "product name"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Coffee", "Equipment", "Accessories"],
+          "description": "product category"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "quantity"
+        },
+        "price": {
+          "type": "number",
+          "description": "product price"
+        }
+      }
+    },
+    "ProductInput": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "product id",
+          "enum": [
+            "PROD-9eab9df2-6d54-11ee-b962-0242ac120002",
+            "PROD-9eab9zf2-6d54-11ee-b962-0242ac120002",
+            "PROD-9eab9lf2-6d54-11ee-b962-0242ac120002",
+            "PROD-9eaba09a-6d54-11ee-b962-0242ac120002",
+            "PROD-9eaba1da-6d54-11ee-b962-0242ac120002",
+            "PROD-9eaba842-6d54-11ee-b962-0242ac120002",
+            "PROD-9eabae28-6d54-11ee-b962-0242ac120002",
+            "PROD-9eabaf4a-6d54-11ee-b962-0242ac120002"
+          ]
+        },
+        "quantity": {
+          "type": "number",
+          "description": "quantity"
+        }
+      }
+    },
+    "NewCartResponse": {
+      "type": "object",
+      "description": "cart output",
+      "properties": {
+        "cartId": {
+          "type": "string"
+        }
+      }, "example": {
+         "cartId": "be16910858a41fd19ea5c1b4e9decca9a784d1024cb00b2158defe2f29dc86dd"
+      }
+    },
+    "OrderResponse": {
+      "type": "object",
+      "description": "order response",
+      "properties": {
+        "cartId": {
+          "type": "string"
+        },
+        "totals": {
+          "type": "object",
+          "properties": {
+            "products": {
+              "type": "number"
+            },
+            "discounts": {
+              "type": "number"
+            },
+            "shipping": {
+              "type": "number"
+            },
+            "order": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "UpdateQuantity": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          }
+        }
+    }
+  }
+}
