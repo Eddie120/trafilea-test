@@ -9,7 +9,7 @@ To execute Go code, you need to follow these steps:
 
 3.Installation:
 ```shell
-$ git clone [https://github.com/Eddie120/MachEight.git](https://github.com/Eddie120/trafilea-test.git)
+$ git clone https://github.com/Eddie120/trafilea-test.git
 $ cd project
 $ go mod tidy
 ```
